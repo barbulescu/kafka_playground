@@ -15,11 +15,12 @@ public class Producer implements Closeable {
         kafkaProducer = new KafkaProducer<String, String>(properties.toProperties());
     }
 
-    public void send(String message) {
-        ProducerRecord<String, String> record = new ProducerRecord<>("first_topic", message);
+    public void send(String message, int index) {
+        String key = "id_" + (index % 2);
+        ProducerRecord<String, String> record = new ProducerRecord<>("first_topic", key, message);
         kafkaProducer.send(record, (metadata, exception) -> {
             if (exception == null) {
-                log.info("Topic {}, Partition {}, Offset {}, Timestamp {}", metadata.topic(), metadata.partition(), metadata.offset(), metadata.timestamp());
+                log.info("Topic {}, Partition {}, Key {}, Offset {}, Timestamp {}", metadata.topic(), metadata.partition(), key, metadata.offset(), metadata.timestamp());
             } else {
                 log.error("Record send error", exception);
             }

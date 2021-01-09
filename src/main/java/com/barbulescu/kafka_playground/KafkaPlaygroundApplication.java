@@ -22,7 +22,7 @@ public class KafkaPlaygroundApplication {
     ApplicationRunner jmsRunner() {
         return args -> {
             IntStream.range(0, 20)
-                    .forEach(i -> producer.send("Hello World " + i));
+                    .forEach(i -> producer.send("Hello World " + i, i));
 
             log.info("Send executed");
         };
