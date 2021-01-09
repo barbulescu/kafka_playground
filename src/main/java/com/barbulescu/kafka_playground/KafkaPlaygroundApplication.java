@@ -29,6 +29,7 @@ public class KafkaPlaygroundApplication {
                     .forEach(i -> producer.send("Hello World " + i, i));
 
             log.info("Send executed");
+            consumer.unsubscribe();
         };
     }
 
