@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 
 import java.util.Properties;
 
+import static org.apache.kafka.clients.producer.ProducerConfig.*;
+
 @ConfigurationProperties(prefix = "producer")
 @Value
 @ConstructorBinding
@@ -17,9 +19,9 @@ public class ProducerProperties {
 
     public Properties toProperties() {
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
+        properties.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        properties.put(KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
+        properties.put(VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
         return properties;
     }
 }

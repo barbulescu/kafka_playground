@@ -12,7 +12,7 @@ public class Producer implements Closeable {
     private final KafkaProducer<String, String> kafkaProducer;
 
     public Producer(ProducerProperties properties) {
-        kafkaProducer = new KafkaProducer<String, String>(properties.toProperties());
+        kafkaProducer = new KafkaProducer<>(properties.toProperties());
     }
 
     public void send(String message, int index) {

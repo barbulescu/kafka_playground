@@ -13,14 +13,18 @@ import java.util.stream.IntStream;
 public class KafkaPlaygroundApplication {
 
     private final Producer producer;
+    private final Consumer consumer;
 
-    public KafkaPlaygroundApplication(Producer producer) {
+    public KafkaPlaygroundApplication(Producer producer, Consumer consumer) {
         this.producer = producer;
+        this.consumer = consumer;
     }
 
     @Bean
     ApplicationRunner jmsRunner() {
         return args -> {
+            new Thread(() -> consumer.subscribe("first_topic")).start();
+
             IntStream.range(0, 20)
                     .forEach(i -> producer.send("Hello World " + i, i));
 
