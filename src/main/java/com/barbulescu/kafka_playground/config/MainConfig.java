@@ -1,5 +1,6 @@
 package com.barbulescu.kafka_playground.config;
 
+import com.barbulescu.kafka_playground.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,8 +17,8 @@ public class MainConfig {
     }
 
     @Bean
-    KafkaProducer<String, String> producer() {
-        return new KafkaProducer<>(producerProperties.toProperties());
+    Producer producer() {
+        return new Producer(producerProperties);
     }
 
 }
